@@ -8,9 +8,10 @@ GAME_CXX=$GAME_SRCD/main.cpp
 
 CXX="g++"
 CXXFLAGS="-std=c++14 -Wpedantic"
+LDFLAGS="-lraylib -lGL -lm -lpthread -ldl -lrt -lX11"
 NAME="Silly-Game"
 
-BUILD_COMMAND="$CXX $CXXFLAGS -o $GAME_BUILDD/$NAME $GAME_CXX"
+BUILD_COMMAND="$CXX $CXXFLAGS $GAME_CXX $LDFLAGS -o $GAME_BUILDD/$NAME"
 STRIP_COMMAND="strip $GAME_BUILDD/$NAME"
 
 #create build directory (assuming it doesnt already exist)
