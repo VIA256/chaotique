@@ -1,67 +1,32 @@
-/*******************************************************************************************
-*
-*   raylib [core] example - Basic window
-*
-*   Welcome to raylib!
-*
-*   To test examples, just press F6 and execute raylib_compile_execute script
-*   Note that compiled executable is placed in the same folder as .c file
-*
-*   You can find all basic examples on C:\raylib\raylib\examples folder or
-*   raylib official webpage: www.raylib.com
-*
-*   Enjoy using raylib. :)
-*
-*   Example originally created with raylib 1.0, last time updated with raylib 1.0
-*
-*   Example licensed under an unmodified zlib/libpng license, which is an OSI-certified,
-*   BSD-like license that allows static linking with closed source software
-*
-*   Copyright (c) 2013-2024 Ramon Santamaria (@raysan5)
-*
-********************************************************************************************/
-
 #include <raylib.h>
+#include <iostream>
 
-//------------------------------------------------------------------------------------
-// Program main entry point
-//------------------------------------------------------------------------------------
-int main(void)
-{
-    // Initialization
-    //--------------------------------------------------------------------------------------
-    const int screenWidth = 800;
-    const int screenHeight = 450;
+int main(void){
+  InitWindow(640, 480, ":3");
+  
+  SetTargetFPS(60);
+  
+  SetExitKey(KEY_NULL); //Disable Exit Key
+  bool altf4pressed = false;
+  while (!WindowShouldClose() && !altf4pressed){
+    //order is update, vars, draw
 
-    InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
+    //check if both alt and f4 are down in the same frame
+    altf4pressed = IsKeyDown(KEY_LEFT_ALT) && IsKeyDown(KEY_F4);
+    
+    BeginDrawing();
+    
+    ClearBackground(VIOLET);
 
-    SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
-    //--------------------------------------------------------------------------------------
-
-    // Main game loop
-    while (!WindowShouldClose())    // Detect window close button or ESC key
-    {
-        // Update
-        //----------------------------------------------------------------------------------
-        // TODO: Update your variables here
-        //----------------------------------------------------------------------------------
-
-        // Draw
-        //----------------------------------------------------------------------------------
-        BeginDrawing();
-
-            ClearBackground(RAYWHITE);
-
-            DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
-
-        EndDrawing();
-        //----------------------------------------------------------------------------------
-    }
-
-    // De-Initialization
-    //--------------------------------------------------------------------------------------
-    CloseWindow();        // Close window and OpenGL context
-    //--------------------------------------------------------------------------------------
-
-    return 0;
+    int fontsize=20;
+    const char* text = "old man chair 4ever :3";
+    int textwidth = MeasureText(text, fontsize);
+    DrawText(text, 640/2-textwidth/2, 480/2-20, fontsize, BLACK);
+    
+    EndDrawing();
+  }
+  
+  CloseWindow();
+  
+  return 0;
 }
